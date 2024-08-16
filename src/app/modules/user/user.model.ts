@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import { TUser } from './user.interface';
 import bcrypt from 'bcrypt';
 
@@ -7,7 +7,11 @@ const UserSchema = new Schema<TUser>({
   email: { type: String, required: true },
   password: { type: String, required: true },
   phone: { type: String, required: true },
-  role: { type: String, required: true, enum: ['admin', 'user'] },
+  role: {
+    type: String,
+    required: true,
+    enum: ['admin', 'user'],
+  },
   address: { type: String, required: true },
 });
 
@@ -22,4 +26,4 @@ UserSchema.post('save', function (doc, next) {
   next();
 });
 
-export const User = model<TUser>('user', UserSchema);
+export const User = mongoose.model<TUser>('user', UserSchema);
