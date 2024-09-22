@@ -21,7 +21,7 @@ const createUserValidation = z.object({
     email: z.string().email(),
     password: z.string(),
     phone: z.string(),
-    role: z.enum(['admin', 'user']),
+
     address: z.string(),
   }),
 });

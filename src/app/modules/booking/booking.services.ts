@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { TBooking } from './booking.interface';
 import { Booking } from './booking.model';
-
 import { Facility } from '../facility/facility.model';
 import moment from 'moment';
-
 import calculatePayable from '../../utilites/calculatePayable';
 import { formatDates, validateDate } from './boooking.utils';
 

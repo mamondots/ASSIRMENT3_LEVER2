@@ -3,6 +3,8 @@ import { JwtPayload } from 'jsonwebtoken';
 import jwt from 'jsonwebtoken';
 import config from '../../config';
 import { User } from '../../modules/user/user.model';
+import sendResponse from '../../utilites/sendResponse';
+import httpStatus from 'http-status';
 
 const auth = (...roles: string[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -14,19 +16,30 @@ const auth = (...roles: string[]) => {
         throw new Error('You are not autilizid');
       }
 
-      // const tokenParts = token.split(' ');
+      const solidToken = token?.split(' ')[1];
 
-      // // checking if the token is in the correct format
-      // if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
-      //   throw new Error('Invalid token format');
-      // }
+      if (token?.split(' ')[0] !== 'Bearer') {
+        sendResponse(res, {
+          statusCode: httpStatus.UNAUTHORIZED,
+          success: false,
+          message: 'You have no access to this route',
+          data: undefined,
+        });
+      }
 
-      // // Extract the token from the token parts
-      // const accessToken = tokenParts[1];
+      // if the token exists
+      if (!token) {
+        sendResponse(res, {
+          statusCode: httpStatus.UNAUTHORIZED,
+          success: false,
+          message: 'You have no access to this route',
+          data: undefined,
+        });
+      }
 
       // checking if the given token is valid
       const decoded = jwt.verify(
-        token,
+        solidToken as string,
         config.jwt_acess_token_secret as string,
       ) as JwtPayload;
 

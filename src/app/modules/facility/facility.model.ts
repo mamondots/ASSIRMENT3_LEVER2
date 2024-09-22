@@ -3,6 +3,7 @@ import { TFacility } from './facility.interface';
 
 const FacilitySchema = new Schema<TFacility>({
   name: { type: String, required: true },
+  img: { type: String, required: true },
   description: { type: String, required: true },
   pricePerHour: { type: Number, required: true },
   location: { type: String, required: true },

@@ -6,6 +6,12 @@ const createUserInToBD = async (payload: TUser) => {
   return result;
 };
 
+const getAllUsersInToBD = async () => {
+  const result = await User.find();
+  return result;
+};
+
 export const userService = {
   createUserInToBD,
+  getAllUsersInToBD,
 };
