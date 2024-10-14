@@ -11,10 +11,17 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ['http://localhost:5173'],
+    origin: 'http://localhost:5173',
     credentials: true,
   }),
 );
+
+// const corsOptions = {
+//   origin: 'https://assirenment-03.vercel.app', // Specify your frontend URL
+//   credentials: true, // Allow credentials (cookies, headers, etc.)
+// };
+
+// app.use(cors());
 
 //  application routes
 app.use('/api', userRoutes);
